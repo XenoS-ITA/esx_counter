@@ -1,4 +1,3 @@
 Locales ['en'] = {
-	['server']   = 'Server name',
+	['server']   = '%s%s ~w~: %s/%s',
 }
-
