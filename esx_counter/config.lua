@@ -1,9 +1,9 @@
 Config        = {}
 Config.Locale = 'en'
+Config.ServerName = 'Change me!'
 
-Config.Color = 'Red'
 Config.MaxPlayers = '32'
-
+Config.Color = 'Red'
 -- Yellow
 -- Red
 -- Green
@@ -11,3 +11,14 @@ Config.MaxPlayers = '32'
 -- Blue
 -- Orange
 -- White
+
+--Dont change
+Config.Colors = {
+    ['Yellow']  = '~y~',
+    ['Red']     = '~r~',
+    ['Green']   = '~g~',
+    ['Purple']  = '~q~',
+    ['Blue']    = '~b~',
+    ['Orange']  = '~o~',
+    ['White']   = '~w~',
+}
