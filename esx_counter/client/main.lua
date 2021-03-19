@@ -1,22 +1,41 @@
 local color = ''
 
-    if Config.Color == 'Yellow' then
-      color = '~y~'
-    elseif Config.Color == 'Red' then
-      color = '~r~'
-    elseif Config.Color == 'Green' then
-      color = '~g~'
-    elseif Config.Color == 'Purple' then
-      color = '~q~'
-    elseif Config.Color == 'Blue' then
-      color = '~b~'
-    elseif Config.Color == 'Orange' then
-      color = '~o~'
-    elseif Config.Color == 'White' then
-      color = '~w~'
-    end
+if Config.Color == 'Yellow' then
+  color = '~y~'
+elseif Config.Color == 'Red' then
+  color = '~r~'
+elseif Config.Color == 'Green' then
+  color = '~g~'
+elseif Config.Color == 'Purple' then
+  color = '~q~'
+elseif Config.Color == 'Blue' then
+  color = '~b~'
+elseif Config.Color == 'Orange' then
+  color = '~o~'
+elseif Config.Color == 'White' then
+  color = '~w~'
+end
+
+local players
+
 Citizen.CreateThread(function()
   while true do
+    TriggerServerEvent("esx_counter:GetAllPlayer")
+    Citizen.Wait(Config.RefreshSecond * 1000)
+  end
+end)
+
+RegisterNetEvent("esx_counter:Callback")
+AddEventHandler("esx_counter:Callback", function(player_table)
+    players = #player_table
+end)
+    
+Citizen.CreateThread(function()
+  while true do
+    while players == nil do -- Wait unti the client get the player count
+      Citizen.Wait(0)
+    end
+
     Citizen.Wait(0)
   
     SetTextFont(7)
@@ -29,8 +48,7 @@ Citizen.CreateThread(function()
     SetTextOutline()
     SetTextEntry("STRING")
 
-    players = GetActivePlayers()
-    AddTextComponentString(color .. _U('server') .. "~w~: " .. #players .. "/" .. Config.MaxPlayers )
+    AddTextComponentString(color .. _U('server') .. "~w~: " .. players .. "/" .. Config.MaxPlayers )
     DrawText(0.02, 0.01)
   end
 end)
